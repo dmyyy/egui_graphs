@@ -137,6 +137,17 @@ pub fn default_node_transform<N: Clone, Ix: IndexType>(
     n
 }
 
+/// Allows placing the node at a specific location.
+pub fn manual_loc_node_transform<N: Clone, Ix: IndexType>(
+    idx: NodeIndex<Ix>,
+    payload: &N,
+    location: Pos2,
+) -> Node<N, Ix> {
+    let mut n = Node::new(payload.clone()).with_label(idx.index().to_string());
+    n.bind(idx, location);
+    n
+}
+
 /// Default edge transform function. Keeps original data and creates a new edge.
 pub fn default_edge_transform<E: Clone, Ix: IndexType>(
     idx: EdgeIndex<Ix>,
